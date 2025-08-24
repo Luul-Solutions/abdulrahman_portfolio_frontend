@@ -1,14 +1,13 @@
+import React from "react";
+
 export default function Achievements() {
   return (
-    <section
-      id="achievements"
-      className="min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-green-500/20"
-    >
-      <h2 className="text-4xl font-bold mb-8">Achievements</h2>
-      <ul className="list-disc list-inside max-w-3xl text-center space-y-2">
-        <li>Achievement 1</li>
-        <li>Achievement 2</li>
-        <li>Achievement 3</li>
+    <section className="min-h-screen p-12 bg-green-100 text-gray-900">
+      <h2 className="text-4xl font-bold mb-6">Achievements</h2>
+      <ul className="list-disc list-inside space-y-2">
+        <li>Reached 5,000 followers on TikTok</li>
+        <li>Completed multiple web development projects</li>
+        <li>Member of a successful student startup team</li>
       </ul>
     </section>
   );

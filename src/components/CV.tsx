@@ -1,13 +1,14 @@
-export default function CV() {
+import React from "react";
+
+export default function CVSection() {
   return (
-    <section
-      id="cv"
-      className="min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-blue-500/20"
-    >
-      <h2 className="text-4xl font-bold mb-8">My CV</h2>
-      <p className="max-w-3xl text-center">
-        Here you can add your education, experience, skills, and certifications.
-      </p>
+    <section className="min-h-screen p-12 bg-gray-100 text-gray-800">
+      <h2 className="text-4xl font-bold mb-6">CV / Education</h2>
+      <ul className="list-disc list-inside space-y-2">
+        <li>Bachelor in Computer Science - New Generation University</li>
+        <li>Internship at Luul Solutions</li>
+        <li>Courses: React, TypeScript, TailwindCSS</li>
+      </ul>
     </section>
   );
 }

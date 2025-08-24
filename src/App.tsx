@@ -1,18 +1,19 @@
-import Navbar from "./components/Navbar";
-import Header from "./components/Header";
-import Projects from "./components/projects";
-import CV from "./components/CV";
+import React from "react";
+import ProfileSection from "./components/ProfileSection";
+import CVSection from "./components/CV";
+import ProjectsSection from "./components/projects";
 import Achievements from "./components/Achievements";
 import Hobbies from "./components/Hobbies";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="scroll-smooth">
-      <Navbar />
+    <div>
       <Header />
-      <CV />
-      <Projects />
+      <ProfileSection />
+      <CVSection />
+      <ProjectsSection />
       <Achievements />
       <Hobbies />
       <Footer />
