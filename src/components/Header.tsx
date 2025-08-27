@@ -1,76 +1,123 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
+  const links = ["Home", "CV", "Projects", "Achievements", "Hobbies"];
 
-  const links = [
-    { name: "Home", href: "#home" },
-    { name: "CV", href: "#cv" },
-    { name: "Projects", href: "#projects" },
-    { name: "Achievements", href: "#achievements" },
-    { name: "Hobbies", href: "#hobbies" },
-  ];
+  // Toggle dark/light mode
+  // const toggleMode = () => {
+  //   setDarkMode(!darkMode);
+  //   if (!darkMode) {
+  //     document.documentElement.classList.add("dark");
+  //   } else {
+  //     document.documentElement.classList.remove("dark");
+  //   }
+  // };
 
   return (
-    <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-yellow-400 shadow-md z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
-        {/* Logo / Name */}
-        <motion.div
-          initial={{ x: -100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-2xl font-bold text-white"
+    <motion.nav
+      className={`fixed w-full text-white px-6 py-4 shadow-xl z-50 ${
+        darkMode
+          ? "bg-gradient-to-r from-blue-500 to-purple-700"
+          : "bg-gray-100 text-gray-900"
+      }`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      <div className="flex justify-between items-center">
+        {/* Logo */}
+        <div
+          className={`font-bold text-xl ${
+            darkMode ? "text-teal-300" : "text-blue-600"
+          }`}
         >
           MyPortfolio
-        </motion.div>
+        </div>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-8">
+        <ul className="hidden md:flex gap-8">
           {links.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-white hover:text-gray-200 font-medium transition-colors"
+            <motion.li
+              key={link}
+              className="cursor-pointer"
+              whileHover={{
+                scale: 1.1,
+                color: darkMode ? "#22d3ee" : "#3b82f6",
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
             >
-              {link.name}
-            </a>
+              <a href={`#${link.toLowerCase()}`}>{link}</a>
+            </motion.li>
           ))}
-        </nav>
+        </ul>
+
+        {/* Dark/Light Mode Switch */}
+        {/* <button
+          onClick={toggleMode}
+          className={`hidden md:block px-4 py-2 rounded-lg border ${
+            darkMode
+              ? "border-white text-white hover:bg-white/20"
+              : "border-gray-400 text-gray-800 hover:bg-gray-300/20"
+          } transition-all`}
+        >
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </button> */}
 
         {/* Mobile Hamburger */}
-        <div className="md:hidden">
-          <button
-            className="text-white focus:outline-none"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? "✖" : "☰"}
-          </button>
-        </div>
+        <button
+          className={`md:hidden text-2xl ${
+            darkMode ? "text-teal-300" : "text-blue-600"
+          } focus:outline-none`}
+          onClick={() => setOpen(!open)}
+        >
+          ☰
+        </button>
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <motion.nav
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          className="md:hidden bg-purple-500"
+      {open && (
+        <motion.ul
+          className={`flex flex-col mt-4 gap-4 md:hidden text-center rounded-lg p-4 ${
+            darkMode ? "bg-indigo-600/80" : "bg-gray-200"
+          }`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <ul className="flex flex-col p-4 gap-4">
-            {links.map((link) => (
-              <li key={link.name}>
-                <a
-                  href={link.href}
-                  className="text-white font-medium text-lg hover:text-gray-200"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </motion.nav>
+          {links.map((link) => (
+            <motion.li
+              key={link}
+              className="cursor-pointer"
+              whileHover={{
+                scale: 1.05,
+                color: darkMode ? "#22d3ee" : "#3b82f6",
+              }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <a href={`#${link.toLowerCase()}`} onClick={() => setOpen(false)}>
+                {link}
+              </a>
+            </motion.li>
+          ))}
+
+          {/* Mobile Dark/Light Mode Switch */}
+          {/* <li>
+            <button
+              onClick={toggleMode}
+              className={`w-full px-4 py-2 rounded-lg border ${
+                darkMode
+                  ? "border-white text-white hover:bg-white/20"
+                  : "border-gray-400 text-gray-800 hover:bg-gray-300/20"
+              } transition-all`}
+            >
+              {darkMode ? "Light Mode" : "Dark Mode"}
+            </button>
+          </li> */}
+        </motion.ul>
       )}
-    </header>
+    </motion.nav>
   );
 }
